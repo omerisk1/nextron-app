@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movies",
+  "info": {
+    "singularName": "movie",
+    "pluralName": "movies",
+    "displayName": "Movie",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "date": {
+      "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "trailerUrl": {
+      "type": "string"
+    },
+    "score": {
+      "type": "string"
+    },
+    "ageLimit": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::categorie.categorie"
+    },
+    "actor": {
+      "type": "component",
+      "repeatable": true,
+      "component": "actor.actor"
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}
