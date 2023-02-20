@@ -19,14 +19,12 @@ export default function MovieDetail({ movie }) {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  console.log(params);
   let movie = {};
   const res = await fetch(
     `http://localhost:1337/api/movies?populate=deep&filters[slug][$eq]=${params.slug}`
   );
   const data = await res.json();
   movie = data.data[0];
-  console.log(movie);
 
   return {
     props: {
