@@ -82,7 +82,7 @@ export default Home;
 
 // serverside
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps = async () => {
   const req = await fetch("http://localhost:1337/api/movies?populate=deep");
   const res = await req.json();
 
