@@ -4,19 +4,30 @@ import ModalImage from "react-modal-image";
 import { BACKEND_URL_FOR_IMAGE } from "../../helper";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavoriList } from "../../redux/features/counter/counterSlice";
+import FavoriList from "../../components/FavoriList";
 
 function MovieDetail({ movie }) {
-  console.log(movie);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Link href="/home">
-        <a
-          href="#"
-          className="bg-blue-900 inline-block py-2 px-4 rounded m-4 color-white hover:bg-blue-700 hover:text-gray-800 transition-all"
-        >
-          &#8249;
-        </a>
-      </Link>
+      <div className="flex items-center justify-between">
+        <div className="">
+          <Link href="/home">
+            <a
+              href="#"
+              className="bg-blue-900 inline-block py-2 px-4 rounded m-4 color-white hover:bg-blue-700 hover:text-gray-800 transition-all"
+            >
+              &#8249;
+            </a>
+          </Link>
+        </div>
+        <div>
+          <FavoriList />
+        </div>
+      </div>
       <div className="flex p-20 ">
         <div className="w-2/4 rounded-2xl">
           <ModalImage
@@ -38,7 +49,10 @@ function MovieDetail({ movie }) {
             <h1 className="text-2xl font-bold mb-5">
               {movie?.attributes?.name}
             </h1>
-            <div className="w-10 h-10 bg-blue-700 flex justify-center items-center rounded-full hover:bg-blue-500 transition-all cursor-pointer">
+            <div
+              className="w-10 h-10 bg-blue-700 flex justify-center items-center rounded-full hover:bg-blue-500 transition-all cursor-pointer"
+              onClick={() => dispatch(addFavoriList(movie))}
+            >
               <ThumbUpIcon />
             </div>
           </div>
@@ -91,7 +105,6 @@ export default MovieDetail;
 
 /*BACKEND TARAFINDA */
 export const getServerSideProps = async ({ params }) => {
-  const slug = params.slug;
   const res = await fetch(
     `http://localhost:1337/api/movies?populate=deep&filters[slug][$eq]=${params.slug}`
   );

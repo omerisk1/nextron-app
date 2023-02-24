@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { BACKEND_URL_FOR_IMAGE } from "../helper/index";
+import FavoriList from "../components/FavoriList";
 
 function Home({ movies }) {
   const [search, setSearch] = useState("");
@@ -47,11 +48,10 @@ function Home({ movies }) {
       <Head>
         <title>Movie Project</title>
       </Head>
-      <div className="flex justify-between items-center px-10">
-        <div className="text-3xl font-bold text-center text-gray-400 mt-10 mb-10">
-          Trend List
-        </div>
-        <div className="relative">
+
+      <div className="flex justify-between items-center">
+        <FavoriList />
+        <div className="mr-10">
           <span className="absolute ml-2 mt-1">&#128270;</span>
           <input
             type="text"
@@ -61,6 +61,9 @@ function Home({ movies }) {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+      </div>
+      <div className="text-3xl font-bold text-gray-400 mt-10 mb-10 ml-10">
+        Trend List
       </div>
       {filteredMovies.length === 0 && (
         <div className="text-center text-2xl text-gray-400 mt-20">
