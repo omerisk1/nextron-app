@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React from "react";
-
 import ModalImage from "react-modal-image";
 import { BACKEND_URL_FOR_IMAGE } from "../../helper";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 function MovieDetail({ movie }) {
+  console.log(movie);
   return (
     <>
       <Link href="/home">
@@ -33,33 +34,36 @@ function MovieDetail({ movie }) {
           />
         </div>
         <div className="p-10 w-2/4">
-          <h1 className="text-2xl font-bold mb-5">{movie?.attributes?.name}</h1>
+          <div className="flex justify-between">
+            <h1 className="text-2xl font-bold mb-5">
+              {movie?.attributes?.name}
+            </h1>
+            <div className="w-10 h-10 bg-blue-700 flex justify-center items-center rounded-full hover:bg-blue-500 transition-all cursor-pointer">
+              <ThumbUpIcon />
+            </div>
+          </div>
           <span className="p-2 border mt-4 rounded">
             {movie?.attributes?.ageLimit}
           </span>
-          <div className="flex items-center  space-x-5  ">
+          <span className="ml-3">{movie?.attributes?.date}</span>
+          <p></p>
+          <div className="flex">
+            {movie?.attributes?.categories?.data?.length > 0 &&
+              movie?.attributes?.categories?.data?.map((category) => (
+                <p className="ml-3 mt-7">{category?.attributes?.name}</p>
+              ))}
+          </div>
+          <div className="flex items-center  space-x-5 ">
             <CircularProgressbar
               className="w-20 mt-10"
               value={movie?.attributes?.score}
               text={`${movie?.attributes?.score}%`}
               strokeWidth={10}
               styles={buildStyles({
-                // Rotation of path and trail, in number of turns (0-1)
                 rotation: 0.25,
-
-                // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                 strokeLinecap: "butt",
-
-                // Text size
                 textSize: "20px",
-
-                // How long animation takes to go from one percentage to another, in seconds
                 pathTransitionDuration: 0.5,
-
-                // Can specify path transition in more detail, or remove it entirely
-                // pathTransition: 'none',
-
-                // Colors
                 pathColor: `rgba(62, 152, 19, ${
                   movie?.attributes?.score / 100
                 })`,
@@ -85,6 +89,7 @@ function MovieDetail({ movie }) {
 
 export default MovieDetail;
 
+/*BACKEND TARAFINDA */
 export const getServerSideProps = async ({ params }) => {
   const slug = params.slug;
   const res = await fetch(

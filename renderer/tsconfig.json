@@ -4,8 +4,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/movies/[slug].js",
-    "pages/home.js"
+    "pages/movies/[slug].tsx",
+    "pages/home.tsx"
   ],
   "exclude": ["node_modules"]
 }

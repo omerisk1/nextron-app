@@ -45,7 +45,7 @@ function Home({ movies }) {
   return (
     <>
       <Head>
-        <title>Home - Nextron (with-typescript-tailwindcss)</title>
+        <title>Movie Project</title>
       </Head>
       <div className="flex justify-between items-center px-10">
         <div className="text-3xl font-bold text-center text-gray-400 mt-10 mb-10">
