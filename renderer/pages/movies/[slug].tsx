@@ -7,9 +7,16 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavoriList } from "../../redux/features/counter/counterSlice";
 import FavoriList from "../../components/FavoriList";
+import { ToastContainer, toast } from "react-toastify";
 
 function MovieDetail({ movie }) {
   const dispatch = useDispatch();
+  const notify = () => toast.success("Beğeni Listesine Eklendi");
+
+  const handleCLick = (movie) => {
+    dispatch(addFavoriList(movie));
+    notify();
+  };
 
   return (
     <>
@@ -51,7 +58,7 @@ function MovieDetail({ movie }) {
             </h1>
             <div
               className="w-10 h-10 bg-blue-700 flex justify-center items-center rounded-full hover:bg-blue-500 transition-all cursor-pointer"
-              onClick={() => dispatch(addFavoriList(movie))}
+              onClick={() => handleCLick(movie)}
             >
               <ThumbUpIcon />
             </div>

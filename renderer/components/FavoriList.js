@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Drawer from "react-modern-drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavorite } from "../redux/features/counter/counterSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function FavoriList() {
   const dispatch = useDispatch();
@@ -10,6 +11,11 @@ export default function FavoriList() {
     setIsOpen((prevState) => !prevState);
   };
   const favoriList = useSelector((state) => state.counter.value);
+  const notify = () => toast.info("Film Favorilerden Çıkarıldı");
+  const handleCLick = (item) => {
+    dispatch(deleteFavorite(item));
+    notify();
+  };
 
   return (
     <>
@@ -37,7 +43,7 @@ export default function FavoriList() {
                 <p>{item}</p>
                 <button
                   onClick={() => {
-                    dispatch(deleteFavorite(item));
+                    handleCLick(item);
                   }}
                 >
                   X
