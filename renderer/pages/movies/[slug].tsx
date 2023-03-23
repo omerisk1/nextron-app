@@ -63,8 +63,10 @@ function MovieDetail({ movie }) {
           <p></p>
           <div className="flex">
             {movie?.attributes?.categories?.data?.length > 0 &&
-              movie?.attributes?.categories?.data?.map((category) => (
-                <p className="ml-3 mt-7">{category?.attributes?.name}</p>
+              movie?.attributes?.categories?.data?.map((category, index) => (
+                <p key={index} className="ml-3 mt-7">
+                  {category?.attributes?.name}
+                </p>
               ))}
           </div>
           <div className="flex items-center  space-x-5 ">
