@@ -26,6 +26,14 @@ export default function FavoriList() {
       >
         My Favorite List
       </button>
+      {/* <a href="/otherList">
+        <button
+          className="m-10 bg-blue-600 p-2 rounded hover:bg-blue-400 transition-all"
+          style={{ color: "black" }}
+        >
+          Other List
+        </button>
+      </a> */}
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
