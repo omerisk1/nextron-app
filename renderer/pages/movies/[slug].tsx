@@ -117,11 +117,25 @@ export const getServerSideProps = async ({ params }) => {
   const res = await fetch(
     `http://localhost:1337/api/movies?populate=deep&filters[slug][$eq]=${params.slug}`
   );
+  const resList = await fetch(`http://localhost:1337/api/movies?populate=deep`);
   const data = await res.json();
+  const dataList = await resList.json();
+  const movie = data.data[0];
+  const movieList = dataList.data;
+
+  const filteredList = movieList.filter((item, index) => {
+    return (
+      item.attributes.categories.data[0].attributes.name ===
+        movie.attributes.categories.data[0].attributes.name &&
+      item.attributes.name !== movie.attributes.name
+    );
+  });
+
+  console.log(filteredList);
 
   return {
     props: {
-      movie: data.data[0],
+      movie,
     },
   };
 };
